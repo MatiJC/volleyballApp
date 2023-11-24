@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class IUserService implements UserService, UserDetailsService {
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder encoder;
 
     @Autowired
     private UserRepository userRepository;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 @CrossOrigin("*")
 public class UserController {
-    @GetMapping("/user")
+    @GetMapping("/users")
     public String helloUser() {
         return "User access level";
     }
