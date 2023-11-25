@@ -2,11 +2,11 @@ package com.maticuad.volleyballApp.models;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
 
 
 @Entity
@@ -25,13 +25,8 @@ public class User implements UserDetails {
     private String username;
     @Column(nullable = false)
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_role_junction",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")}
-    )
-    private Set<Role> authorities;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
@@ -39,16 +34,15 @@ public class User implements UserDetails {
 
     public User() {
         super();
-        this.authorities = new HashSet<Role>();
     }
 
-    public User(String username, String password, String firstName, String lastName, Set<Role> authorities) {
+    public User(String username, String password, String firstName, String lastName, Role role) {
         super();
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.authorities = authorities;
+        this.role = role;
     }
 
     public Long getId() {
@@ -65,11 +59,11 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    public void setAuthorities(Set<Role> authorities) {
-        this.authorities = authorities;
+    public void setAuthorities(Role role) {
+        this.role = role;
     }
 
     public String getPassword() {
