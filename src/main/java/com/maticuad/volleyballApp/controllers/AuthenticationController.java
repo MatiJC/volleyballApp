@@ -1,23 +1,31 @@
 package com.maticuad.volleyballApp.controllers;
 
+import com.maticuad.volleyballApp.auth.AuthenticationResponse;
+import com.maticuad.volleyballApp.dto.AuthDTO;
 import com.maticuad.volleyballApp.dto.RegistrationDTO;
-import com.maticuad.volleyballApp.models.User;
 import com.maticuad.volleyballApp.services.AuthenticationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 @CrossOrigin("*")
 public class AuthenticationController {
-    @Autowired
-    private AuthenticationService authenticationService;
+
+    private final AuthenticationService authenticationService;
+
+    public AuthenticationController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
 
     @PostMapping("/register")
-    public User registerUser(@RequestBody RegistrationDTO body) throws Exception {
-        return authenticationService.registerUser(body.username(), body.password(),
-                body.firstName(), body.lastName());
+    public ResponseEntity<AuthenticationResponse> registerUser(@RequestBody RegistrationDTO request) throws Exception {
+        return ResponseEntity.ok(authenticationService.registerUser(request));
+    }
 
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticateUser(@RequestBody AuthDTO request) throws Exception {
+        return ResponseEntity.ok(authenticationService.authenticateUser(request));
     }
 
 }

@@ -25,12 +25,12 @@ public class User implements UserDetails {
     private String username;
     @Column(nullable = false)
     private String password;
-    @Enumerated(EnumType.STRING)
-    private Role role;
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
     private String lastName;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public User() {
         super();

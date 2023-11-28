@@ -1,8 +1,10 @@
 package com.maticuad.volleyballApp.services;
 
-import com.maticuad.volleyballApp.models.User;
+import com.maticuad.volleyballApp.auth.AuthenticationResponse;
+import com.maticuad.volleyballApp.dto.AuthDTO;
+import com.maticuad.volleyballApp.dto.RegistrationDTO;
 
 public interface AuthenticationService {
-    User registerUser(String username, String password,
-                      String firstName, String lastName);
+     AuthenticationResponse registerUser(RegistrationDTO request);
+     AuthenticationResponse authenticateUser(AuthDTO request);
 }
