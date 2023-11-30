@@ -23,9 +23,7 @@ public class IUserService implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         System.out.println("Inside user service");
-
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User is not valid"));
     }
 }
