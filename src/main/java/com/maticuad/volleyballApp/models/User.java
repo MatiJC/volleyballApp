@@ -1,6 +1,7 @@
 package com.maticuad.volleyballApp.models;
 
 import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,7 +9,9 @@ import java.util.Collection;
 import java.util.List;
 
 
-
+@Getter
+@Setter
+@NoArgsConstructor(force = true)
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -20,6 +23,7 @@ public class User implements UserDetails {
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     @Column(name = "user_id")
+    @Setter(AccessLevel.NONE)
     private Long id;
     @Column(nullable = false, unique = true)
     private String username;
@@ -32,29 +36,12 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User() {
-        super();
-    }
-
     public User(String username, String password, String firstName, String lastName, Role role) {
-        super();
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String email) {
-        this.username = email;
     }
 
     @Override
@@ -64,10 +51,6 @@ public class User implements UserDetails {
 
     public void setAuthorities(Role role) {
         this.role = role;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
@@ -88,25 +71,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 }

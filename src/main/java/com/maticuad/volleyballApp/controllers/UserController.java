@@ -1,18 +1,35 @@
 package com.maticuad.volleyballApp.controllers;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.maticuad.volleyballApp.dto.UserDTO;
+import com.maticuad.volleyballApp.services.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/users")
 @CrossOrigin("*")
+@RequiredArgsConstructor
 public class UserController {
-    @GetMapping("/users")
+    private final UserService userService;
+
+    @GetMapping("/hello")
     public String helloUser() {
         return "User access level";
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserDTO>> getUsers() {
+        return ResponseEntity.ok(userService.findAllUsers());
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String  username) {
+        return ResponseEntity.ok(userService.findByUsername(username));
+    }
+
 
 }

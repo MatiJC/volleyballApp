@@ -1,9 +1,16 @@
 package com.maticuad.volleyballApp.models;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor(force = true)
 @Entity
 @Table(name = "teams")
 public class Team {
@@ -14,42 +21,21 @@ public class Team {
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "team_sequence")
     @Column(name = "team_id")
+    @Setter(AccessLevel.NONE)
     private Long id;
-    private String teamName;
+    private final String teamName;
     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
     private Set<Player> players;
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public Team() {
-    }
-
     public Team(String teamName) {
         this.teamName = teamName;
     }
 
-    public Team(String teamName, Set<Player> players) {
+    public Team(String teamName, Set<Player> players, Gender gender) {
         this.teamName = teamName;
         this.players = players;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTeamName() {
-        return teamName;
-    }
-
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
-    public Set<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(Set<Player> players) {
-        this.players = players;
+        this.gender = gender;
     }
 }
