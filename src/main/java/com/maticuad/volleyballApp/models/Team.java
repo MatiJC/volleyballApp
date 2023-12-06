@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@NoArgsConstructor(force = true)
+@NoArgsConstructor
 @Entity
 @Table(name = "teams")
 public class Team {
@@ -23,7 +23,7 @@ public class Team {
     @Column(name = "team_id")
     @Setter(AccessLevel.NONE)
     private Long id;
-    private final String teamName;
+    private String teamName;
     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
     private Set<Player> players;
     @Enumerated(EnumType.STRING)

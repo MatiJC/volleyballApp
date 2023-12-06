@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor(force = true)
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
