@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -25,7 +26,7 @@ public class Team {
     private Long id;
     private String teamName;
     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
-    private Set<Player> players;
+    private Set<Player> players = new HashSet<>();
     @Enumerated(EnumType.STRING)
     private Gender gender;
 

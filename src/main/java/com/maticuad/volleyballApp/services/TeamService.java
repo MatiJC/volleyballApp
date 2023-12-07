@@ -2,7 +2,6 @@ package com.maticuad.volleyballApp.services;
 
 import com.maticuad.volleyballApp.dto.PlayerDTO;
 import com.maticuad.volleyballApp.dto.TeamDTO;
-import com.maticuad.volleyballApp.models.Player;
 import com.maticuad.volleyballApp.models.Team;
 
 import java.util.List;

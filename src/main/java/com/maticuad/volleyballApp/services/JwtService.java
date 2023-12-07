@@ -13,6 +13,6 @@ public interface JwtService {
     String generateToken(UserDetails userDetails);
     String generateToken(Map<String, Object> extraClaims,
                          UserDetails userDetails);
+    String generateRefreshToken(UserDetails userDetails);
     Boolean isTokenValid(String token, UserDetails userDetails);
-
 }

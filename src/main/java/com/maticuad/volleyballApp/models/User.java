@@ -35,6 +35,8 @@ public class User implements UserDetails {
     private String lastName;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
 
     public User(String username, String password, String firstName, String lastName, Role role) {
         this.username = username;
