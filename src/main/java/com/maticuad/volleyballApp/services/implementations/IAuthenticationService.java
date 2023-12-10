@@ -53,7 +53,7 @@ public class IAuthenticationService implements AuthenticationService {
     }
 
     @Override
-    public AuthenticationResponse authenticateUser(AuthDTO request) {
+    public AuthenticationResponse loginUser(AuthDTO request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.username(),
                         request.password())
@@ -78,7 +78,7 @@ public class IAuthenticationService implements AuthenticationService {
             User user = userRepository.findByUsername(username)
                     .orElseThrow();
             if (jwtService.isTokenValid(refreshToken, user)) {
-                var accessToken = jwtService.generateToken(user);
+                String accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
                 AuthenticationResponse authResponse = new AuthenticationResponse(accessToken, refreshToken);

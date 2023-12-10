@@ -26,8 +26,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> authenticateUser(@RequestBody AuthDTO request) throws Exception {
-        return ResponseEntity.ok(authenticationService.authenticateUser(request));
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthDTO request) throws Exception {
+        return ResponseEntity.ok(authenticationService.loginUser(request));
     }
 
     @PostMapping("/refresh-token")

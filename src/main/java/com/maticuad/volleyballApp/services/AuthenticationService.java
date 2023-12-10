@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public interface AuthenticationService {
      AuthenticationResponse registerUser(RegistrationDTO request);
-     AuthenticationResponse authenticateUser(AuthDTO request);
+     AuthenticationResponse loginUser(AuthDTO request);
 
     void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException;
     void saveUserToken(User user, String jwtToken);

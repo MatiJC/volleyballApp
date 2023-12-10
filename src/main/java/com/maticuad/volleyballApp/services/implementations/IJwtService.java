@@ -1,7 +1,9 @@
 package com.maticuad.volleyballApp.services.implementations;
 
+import com.maticuad.volleyballApp.models.User;
 import com.maticuad.volleyballApp.services.JwtService;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -42,6 +44,14 @@ public class IJwtService implements JwtService {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
+
+    /*private Map<String, Object> generateExtraClaims(User user) {
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("name", user.getUsername());
+        extraClaims.put("role", user.getRole().name());
+        extraClaims.put("permission", user.getAuthorities());
+        return extraClaims;
+    }*/
 
     private String buildToken(
             Map<String, Object> extraClaims,
