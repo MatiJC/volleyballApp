@@ -22,7 +22,7 @@ public class User implements UserDetails {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false, updatable = false)
     @Setter(AccessLevel.NONE)
     private Long id;
     @Column(nullable = false, unique = true)

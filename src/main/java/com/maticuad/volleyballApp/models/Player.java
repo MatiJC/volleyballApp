@@ -16,7 +16,7 @@ public class Player {
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "player_sequence")
-    @Column(name = "player_id")
+    @Column(name = "player_id", nullable = false, updatable = false)
     @Setter(AccessLevel.NONE)
     private Long id;
     private String firstName;

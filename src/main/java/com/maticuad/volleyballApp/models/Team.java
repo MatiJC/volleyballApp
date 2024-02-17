@@ -21,7 +21,7 @@ public class Team {
             sequenceName = "team_sequence",
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "team_sequence")
-    @Column(name = "team_id")
+    @Column(name = "team_id", nullable = false, updatable = false)
     @Setter(AccessLevel.NONE)
     private Long id;
     private String teamName;
